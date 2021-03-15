@@ -38,10 +38,14 @@ int main() {
     bool geq = x >= y;
     std::cout << "x >= y ? " << geq << std::endl;
 
+    std::cout << std::endl << "Accessors: " << std::endl;
 
     Rational n(10, 5);
     std::cout << "10/5 =  ";
-    Rational b = n.reduce();
-    b.print(std::cout);
-    
+    n.reduce().print(std::cout);
+    std::cout << "-1 * y =  ";
+    y.neg().print(std::cout);
+    std::cout << "y ^(-1) =  ";
+    y.inv().print(std::cout);
+
 }

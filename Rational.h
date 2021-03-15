@@ -1,6 +1,5 @@
-//#pragma once
 #include <iostream>
-// Дробь, x/y
+// Дробь x/y
 
 
 class Rational {
@@ -53,6 +52,7 @@ public:
     bool operator<=(Rational a);
     bool operator>(Rational a);
     bool operator>=(Rational a);
+    
     friend std::ostream& operator<<(std::ostream& out, Rational& n);
     friend std::istream& operator>>(std::istream& in, Rational& n);
 

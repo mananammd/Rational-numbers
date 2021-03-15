@@ -1,11 +1,11 @@
 #include "Rational.h"
 
 namespace {
-    //нок
     int gcd(int a, int b){
         return b ? gcd(b, a % b) : a;
     }
 }
+
 
 Rational::Rational() {
     numerator = 1;
@@ -22,7 +22,6 @@ Rational::Rational(int x, int y) {
     }
     numerator = x;
     denumerator = y;
-    reduce();
 }
 
 Rational::Rational(int x) {
@@ -41,8 +40,9 @@ Rational Rational::reduce() {
 }
 
 
+
 Rational Rational::neg() {
-     return Rational(-1 * numerator, denumerator);
+    return Rational(-1 * numerator, denumerator);
 }
 
 Rational Rational:: inv() {
@@ -50,22 +50,17 @@ Rational Rational:: inv() {
 }
 
 
-Rational Rational::sum(Rational r) {
-    int newNumerator = ((numerator * r.denumerator) + 
-         (r.numerator * denumerator));
 
+Rational Rational::sum(Rational r) {
     int newDenumerator = denumerator * r.denumerator;
+    int newNumerator = ((numerator * r.denumerator) + 
+        (r.numerator * denumerator));
 
     return Rational(newNumerator, newDenumerator);
 }
 
 Rational Rational::sub(Rational r) {
-    int newNumerator = ((numerator * r.denumerator) - 
-         (r.numerator * denumerator));
-
-    int newDenumerator = denumerator * r.denumerator;
-
-    return Rational(newNumerator, newDenumerator);
+    return sum(r.neg());
 }
 
 Rational Rational::mul(Rational r) {
@@ -76,11 +71,10 @@ Rational Rational::mul(Rational r) {
 }
 
 Rational Rational::div(Rational r) {
-    return Rational (
-        numerator * r.denumerator,
-        denumerator * r.numerator
-    );
+    return mul(r.inv());
 }
+
+
 
 bool Rational::eq(Rational r) {
     r.reduce();
@@ -115,6 +109,8 @@ bool Rational::geq(Rational r) {
     return !(l(r));
 }
 
+
+
 void Rational::print(std::ostream& out) {
     reduce();
     if (nan == false) {
@@ -138,6 +134,8 @@ void Rational::scan(std::istream& in) {
         
 }
 
+
+
 Rational Rational::operator+(Rational a) {
     return sum(a);
 }
@@ -153,7 +151,6 @@ Rational Rational::operator*(Rational a) {
 Rational Rational::operator/(Rational a) {
     return div(a);
 }
-
 
 bool Rational::operator==(Rational a) {
     return eq(a);
@@ -190,4 +187,3 @@ std::istream& operator>> (std::istream& in, Rational& n) {
     n.scan(in);
     return in;
 }
-
